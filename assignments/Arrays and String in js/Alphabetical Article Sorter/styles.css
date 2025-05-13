@@ -1,21 +1,21 @@
 body {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
+  margin: 0; /* Remove default margin from the body */
+  display: flex; /* Use flexbox layout */
+  align-items: center; /* Center items vertically */
+  min-height: 100vh; /* Set minimum height to 100% of the viewport height */
 }
 
 #bands {
-  list-style: inside square;
-  font-size: 20px;
-  background: white;
-  width: 500px;
-  margin: auto;
-  padding: 0;
-  box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+  list-style: inside square; /* Set list items to have square bullets positioned inside the content flow */
+  font-size: 20px; /* Set font size to 20 pixels */
+  background: white; /* Set background color to white */
+  width: 500px; /* Set width to 500 pixels */
+  margin: auto; /* Center the element horizontally */
+  padding: 0; /* Remove default padding */
+  box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05); /* Add a light shadow around the element */
 }
 
 #bands li {
-  border-bottom: 1px solid #efefef;
-  padding: 20px;
+  border-bottom: 1px solid #efefef; /* Add a light gray bottom border to each list item */
+  padding: 20px; /* Add 20px padding inside each list item */
 }

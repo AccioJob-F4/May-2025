@@ -1,28 +1,36 @@
 function convertToRoman(num) {
+  // Define an array of symbol-value pairs for Roman numerals in descending order
   const symbols = [
-    ["M", 1000],
-    ["CM", 900],
-    ["D", 500],
-    ["CD", 400],
-    ["C", 100],
-    ["XC", 90],
-    ["L", 50],
-    ["XL", 40],
-    ["X", 10],
-    ["IX", 9],
-    ["V", 5],
-    ["IV", 4],
-    ["I", 1],
+    ["M", 1000], // 1000 = M
+    ["CM", 900], // 900 = CM
+    ["D", 500], // 500 = D
+    ["CD", 400], // 400 = CD
+    ["C", 100], // 100 = C
+    ["XC", 90], // 90 = XC
+    ["L", 50], // 50 = L
+    ["XL", 40], // 40 = XL
+    ["X", 10], // 10 = X
+    ["IX", 9], // 9 = IX
+    ["V", 5], // 5 = V
+    ["IV", 4], // 4 = IV
+    ["I", 1], // 1 = I
   ];
 
+  // Initialize an empty string to build the Roman numeral
   let roman = "";
+  // Loop through each symbol-value pair
   symbols.forEach((item) => {
+    // Destructure the array to get the symbol and its value
     const [symbol, value] = item;
+    // While the current number is greater than or equal to the current value
     while (num >= value) {
+      // Add the corresponding Roman numeral symbol to the result
       roman += symbol;
+      // Subtract the value from the number
       num -= value;
     }
   });
+  // Return the complete Roman numeral string
   return roman;
 }
 

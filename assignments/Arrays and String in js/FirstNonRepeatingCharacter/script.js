@@ -1,7 +1,8 @@
 function firstNonRepeatedChar(str) {
+  // Object to store the count of each character in the string
   let charCount = {};
 
-  //create frequency
+  // Create frequency map: loop through each character in the string
   for (let char of str) {
     charCount[char] = (charCount[char] || 0) + 1;
   }
