@@ -1,0 +1,11 @@
+{
+  "name": "Divyansh Singh",
+  "age": 20,
+  "isAdmin": false,
+  "hobbies": ["reading", "coding", "music"],
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "zip": "12345"
+  }
+}

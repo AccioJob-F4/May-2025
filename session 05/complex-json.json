@@ -1,0 +1,60 @@
+{
+  "user": {
+    "id": 101,
+    "username": "john_doe",
+    "email": "john.doe@example.com",
+    "profile": {
+      "fullName": "John Doe",
+      "dob": "1995-04-23",
+      "location": {
+        "country": "USA",
+        "state": "California",
+        "city": "Los Angeles"
+      }
+    },
+    "preferences": {
+      "notifications": {
+        "email": true,
+        "sms": false,
+        "push": true
+      },
+      "theme": "dark",
+      "languages": ["English", "Spanish", "French"]
+    },
+    "contacts": [
+      {
+        "type": "email",
+        "value": "john.doe@example.com"
+      },
+      {
+        "type": "phone",
+        "value": "+1234567890"
+      }
+    ],
+    "posts": [
+      {
+        "postId": 1,
+        "content": "Hello World!",
+        "likes": 30,
+        "comments": [
+          {
+            "userId": 202,
+            "comment": "Nice post!",
+            "timestamp": "2025-05-15T12:00:00Z"
+          },
+          {
+            "userId": 203,
+            "comment": "Thanks for sharing.",
+            "timestamp": "2025-05-15T12:15:00Z"
+          }
+        ]
+      },
+      {
+        "postId": 2,
+        "content": "JSON is awesome!",
+        "likes": 45,
+        "comments": []
+      }
+    ]
+  }
+}
