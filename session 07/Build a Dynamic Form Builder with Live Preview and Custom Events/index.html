@@ -1,17 +1,32 @@
 <!-- Problem Statement:
 Create a Dynamic Form Builder that allows users to:
 
-Add input fields (text, email, number) dynamically using a sidebar menu.
-
-Each field should be draggable to reorder.
-
-Edit the label by double-clicking it.
-
-Live preview should update in real-time as fields are added or reordered.
-
-Pressing Ctrl + Z should undo the last change using custom event handling.
-
-Prevent user from pasting into the email field and alert the user.
-
-Prevent form submission on Enter key for any input field.
+ - Add input fields (text, email, number) dynamically using a sidebar menu.
+ - Each field should be draggable to reorder.
+ - Edit the label by double-clicking it.
+ - Live preview should update in real-time as fields are added or reordered.
+ - Pressing Ctrl + Z should undo the last change using custom event handling.
+ - Prevent user from pasting into the email field and alert the user.
+ - Prevent form submission on Enter key for any input field.
 -->
+
+<html lang="en">
+  <head>
+    <title>Dynamic Form Builder</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div>
+      <button id="addtext">Add Text field</button>
+      <button id="addEmail">Add Email field</button>
+      <button id="addNumber">Add Number field</button>
+    </div>
+
+    <form id="formBuilder" class="form-container"></form>
+
+    <h3>Live Preview</h3>
+    <div id="preview" class="preview-container"></div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

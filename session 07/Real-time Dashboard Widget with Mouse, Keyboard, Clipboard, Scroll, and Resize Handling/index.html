@@ -1,16 +1,41 @@
 <!-- Problem Statement:
 Build a real-time dashboard widget with the following features:
 
-Tracks how many times a user clicks on the widget.
+ - Tracks how many times a user clicks on the widget.
+ - Copies the stats when user presses Ctrl + C.
+ - Pressing any number key sets the "threshold" of clicks.
+ - Changes background color if threshold is exceeded.
+ - Widget updates its layout on window resize.
+ - Logs when user scrolls to the widget section.
+ - Exports a custom event thresholdReached when threshold is crossed. -->
 
-Copies the stats when user presses Ctrl + C.
+<!-- ------------------------------------------------------------------------------------------------ -->
 
-Pressing any number key sets the "threshold" of clicks.
+<!-- Instructions:
+1. HTML Structure:
+   - Create a dashboard widget container with appropriate HTML elements
+   - Include elements to display click count and threshold
+   - Add styling to make the widget visually appealing
 
-Changes background color if threshold is exceeded.
+2. JavaScript Implementation:
+   - Mouse Events:
+     * Add click event listener to track user clicks on the widget
+     * Update and display the click count
 
-Widget updates its layout on window resize.
+   - Keyboard Events:
+     * Listen for number key presses (0-9) to set the threshold
+     * Implement Ctrl+C functionality to copy widget stats to clipboard
 
-Logs when user scrolls to the widget section.
+   - Widget Behavior:
+     * Change background color when click count exceeds threshold
+     * Dispatch a custom 'thresholdReached' event when threshold is crossed
 
-Exports a custom event thresholdReached when threshold is crossed. -->
+   - Window Events:
+     * Add resize event listener to adjust widget layout
+     * Implement scroll detection to log when user scrolls to widget
+
+3. Testing Your Solution:
+   - Verify all features work as expected
+   - Test edge cases (e.g., setting threshold to 0)
+   - Ensure the widget is responsive on different screen sizes
+-->

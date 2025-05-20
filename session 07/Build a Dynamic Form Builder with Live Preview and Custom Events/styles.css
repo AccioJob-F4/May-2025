@@ -1,0 +1,27 @@
+.form-container,
+.preview-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+}
+
+.field {
+  margin: 10px 0;
+  padding: 10px;
+  background: #f4f4f4;
+  cursor: pointer;
+}
+
+button {
+  background-color: dodgerblue;
+  outline: none;
+  padding: 12px 8px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
