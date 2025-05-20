@@ -1,0 +1,33 @@
+/*  your css code here. If applicable */
+body {
+  background-color: rgb(161, 100, 223);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.btn,
+.stop {
+  background-color: rebeccapurple;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  margin: 1rem;
+  padding: 1.5rem 3rem;
+  cursor: pointer;
+}
+
+.btn:hover,
+.stop:hover {
+  opacity: 0.5;
+}
+
+.btn:focus,
+.stop:focus {
+  outline: none;
+}
