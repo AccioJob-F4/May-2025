@@ -1,3 +1,15 @@
+/**
+ * LIBRARY SYSTEM IMPLEMENTATION - PRACTICE EXERCISE
+ *
+ * This file demonstrates:
+ * - Object-oriented programming in JavaScript
+ * - Class implementation with methods
+ * - Nested object structures
+ * - Deep cloning of objects
+ * - Array methods (find, filter, reduce)
+ * - Data manipulation and management
+ */
+
 // QUESTION:
 // =========
 // Library System with Nested Objects and Cloning
@@ -16,27 +28,46 @@
 //    - Clone a section using a deep copy function
 //    - Calculate the total number of books in the library
 
-// Utility function for creating deep copies of objects
-// Uses JSON methods to create a completely new object with the same structure and values
-// This ensures that modifying the clone doesn't affect the original object
+/**
+ * Creates a deep copy of an object using JSON serialization and parsing
+ *
+ * @param {Object} obj - The object to be deeply cloned
+ * @returns {Object} A new object with the same structure and values but no references to the original
+ */
 function deepClone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
-// Main Library class that manages sections and books
+/**
+ * Library class representing a collection of sections containing books
+ * Manages the organization and operations on books and sections
+ */
 class Library {
+  /**
+   * Create a new Library instance
+   * Initializes with an empty array of sections
+   */
   constructor() {
     // Initialize the library with an empty array of sections
     this.sections = [];
   }
 
-  // Method to add a new section to the library
+  /**
+   * Adds a new section to the library
+   *
+   * @param {Object} section - The section object to add, should have sectionName and books properties
+   */
   addSection(section) {
     // Add the section object to the sections array
     this.sections.push(section);
   }
 
-  // Method to add a book to a specific section identified by name
+  /**
+   * Adds a book to a specific section identified by name
+   *
+   * @param {string} sectionName - The name of the section to add the book to
+   * @param {Object} book - The book object to add
+   */
   addBook(sectionName, book) {
     // Find the section with the matching name
     const section = this.sections.find((s) => s.sectionName === sectionName);
@@ -46,7 +77,12 @@ class Library {
       : console.log(`Section ${sectionName} not found.`);
   }
 
-  // Method to remove a book from a specific section by its title
+  /**
+   * Removes a book from a specific section by its title
+   *
+   * @param {string} sectionName - The name of the section to remove the book from
+   * @param {string} title - The title of the book to remove
+   */
   removeBook(sectionName, title) {
     // Find the section with the matching name
     const section = this.sections.find((s) => s.sectionName === sectionName);
@@ -57,7 +93,12 @@ class Library {
     section.books = section.books.filter((book) => book.title !== title);
   }
 
-  // Method to create a deep copy of a section by name
+  /**
+   * Creates a deep copy of a section by name
+   *
+   * @param {string} sectionName - The name of the section to clone
+   * @returns {Object|null} A deep copy of the section or null if not found
+   */
   cloneSection(sectionName) {
     // Find the section with the matching name
     const section = this.sections.find((s) => s.sectionName === sectionName);
@@ -65,7 +106,11 @@ class Library {
     return section ? deepClone(section) : null;
   }
 
-  // Method to calculate the total number of books across all sections
+  /**
+   * Calculates the total number of books across all sections
+   *
+   * @returns {number} The total number of books in the library
+   */
   calculateTotalBooks() {
     // Use reduce to sum the number of books in each section
     return this.sections.reduce(
@@ -75,7 +120,9 @@ class Library {
   }
 }
 
-// Test code to demonstrate the Library System functionality
+// =====================================================================
+// TEST CODE
+// =====================================================================
 // Create a new library instance
 const library = new Library();
 

@@ -1,3 +1,18 @@
+/**
+ * JSON (JAVASCRIPT OBJECT NOTATION) - SESSION 05
+ * This file covers JSON concepts and methods including:
+ * - JSON syntax rules and structure
+ * - Comparison with XML
+ * - Real-world use cases
+ * - JSON methods (stringify and parse)
+ * - Handling circular references
+ * - Polyfill implementations
+ * - Practical JSON data extraction examples
+ */
+
+// =====================================================================
+// JSON BASICS
+// =====================================================================
 // JSON --> JavaScript Object Notation
 
 // SYNTAX RULES OF JSON
@@ -10,6 +25,9 @@
 // Multiple key-value pairs are separated by commas
 // The last key-value pair must not end with a comma
 
+// =====================================================================
+// JSON VS XML COMPARISON
+// =====================================================================
 // COMPARISON WITH XML
 // --------------------------
 // XML is a markup language that is used to structure data
@@ -34,6 +52,9 @@
 // Native JS methods (JSON.parse(), JSON.stringify())
 // XML requires XML parsers
 
+// =====================================================================
+// JSON EXAMPLES
+// =====================================================================
 // JSON Example
 // --------------------------
 // {
@@ -45,7 +66,7 @@
 // XML Example
 // --------------------------
 // <user>
-//     <name>Divyansh Singh</name>
+//     <n>Divyansh Singh</n>
 //     <age>20</age>
 //     <isAdmin>false</isAdmin>
 // </user>
@@ -56,8 +77,8 @@
 //    "name": "Divyansh Singh",
 //   "age": 20,
 //   "isAdmin": false,
-//   "hobbies": ["reading", "coding", "music"],
-//   "address": {
+//   "hobbies": ["reading", "coding", "music"],  // Array of values
+//   "address": {                                // Nested object
 //     "street": "123 Main St",
 //     "city": "Anytown",
 //     "zip": "12345"
@@ -67,7 +88,7 @@
 // Complex XML Example
 // --------------------------
 /* <user>
-  <name>Divyansh Singh</name>
+  <n>Divyansh Singh</n>
   <age>20</age>
   <isAdmin>false</isAdmin>
   <hobbies>
@@ -82,6 +103,9 @@
   </address>
 </user> */
 
+// =====================================================================
+// REAL-WORLD JSON USE CASES
+// =====================================================================
 // Real world use cases of JSON
 // -----------------------------
 // Config files
@@ -125,6 +149,9 @@
 //     }
 // }
 
+// =====================================================================
+// JSON METHODS
+// =====================================================================
 // JSON METHODS
 // -----------------------------
 
@@ -142,12 +169,12 @@
 //   isActive: true,
 // };
 
-// const jsonString = JSON.stringify(user);
-// const jsonStringWithReplacer = JSON.stringify(user, ["name", "hobbies"]);
-// const jsonStringWithSpace = JSON.stringify(user, null, 4);
-// console.log(jsonString);
-// console.log(jsonStringWithReplacer);
-// console.log(jsonStringWithSpace);
+// const jsonString = JSON.stringify(user);                // Basic conversion to JSON string
+// const jsonStringWithReplacer = JSON.stringify(user, ["name", "hobbies"]); // Only include name and hobbies
+// const jsonStringWithSpace = JSON.stringify(user, null, 4); // Pretty print with 4 spaces indentation
+// console.log(jsonString);               // {"name":"Alice","age":25,"hobbies":["reading","coding"],"isActive":true}
+// console.log(jsonStringWithReplacer);   // {"name":"Alice","hobbies":["reading","coding"]}
+// console.log(jsonStringWithSpace);      // Pretty-printed JSON with indentation
 
 // JSON.parse(text, reviver) --> parses a JSON string and converts it into a JavaScript object
 // ----------------------------------------------------------------------------------------------------
@@ -164,28 +191,31 @@
 
 // const jsonString = JSON.stringify(user);
 
-// const revertedUser = JSON.parse(jsonString);
+// const revertedUser = JSON.parse(jsonString);  // Basic conversion from JSON string to object
 // const revertedUserWithReviver = JSON.parse(jsonString, (key, value) => {
 //   if (key === "age") {
-//     return value > 18 ? "Adult" : "Minor";
+//     return value > 18 ? "Adult" : "Minor"; // Transform age values based on condition
 //   }
 //   return value;
 // });
-// console.log(revertedUser);
-// console.log(revertedUserWithReviver);
+// console.log(revertedUser);             // Original object structure restored
+// console.log(revertedUserWithReviver);  // Object with age transformed to "Adult" or "Minor"
 
+// =====================================================================
+// HANDLING CIRCULAR REFERENCES
+// =====================================================================
 // HANDLING CIRCULAR REFERENCES
 // -----------------------------
 
 // const employee = { name: "Divyansh Singh" };
 
-// employee.circle = employee;
+// employee.circle = employee;            // Creates a circular reference
 
-// console.log(employee); // { name: 'Divyansh Singh', circle: [Circular *1] }
+// console.log(employee);                 // { name: 'Divyansh Singh', circle: [Circular *1] }
 
 // const jsonString = JSON.stringify(employee);
 
-// console.log(jsonString); // TypeError: Converting circular structure to JSON
+// console.log(jsonString);               // TypeError: Converting circular structure to JSON
 
 // SOLUTION
 // ---------
@@ -222,12 +252,15 @@
 
 // employee.circle = employee;
 
-// console.log(employee); // { name: 'Divyansh Singh', circle: [Circular *1] }
+// console.log(employee);                 // { name: 'Divyansh Singh', circle: [Circular *1] }
 
 // const jsonString = JSON.stringify(employee, circularReference());
 
-// console.log(jsonString); // { name: 'Divyansh Singh', circle: '[Circular Reference Found]' }
+// console.log(jsonString);               // { name: 'Divyansh Singh', circle: '[Circular Reference Found]' }
 
+// =====================================================================
+// JSON POLYFILL IMPLEMENTATIONS
+// =====================================================================
 // Polyfills
 // -----------
 
@@ -238,21 +271,26 @@
 //     const seen = new Set();
 
 //     function stringifyValue(value) {
+//       // Handle null values
 //       if (value === null) {
 //         return "null";
 //       }
+//       // Handle string values (with quotes)
 //       if (typeof value === "string") {
 //         return `"${value}"`;
 //       }
+//       // Handle number and boolean values
 //       if (typeof value === "number" || typeof value === "boolean") {
 //         return String(value);
 //       }
 
+//       // Handle arrays
 //       if (Array.isArray(value)) {
 //         const elements = value.map(stringifyValue).join(",");
 //         return `[${elements}]`;
 //       }
 
+//       // Handle objects (including circular references)
 //       if (typeof value === "object") {
 //         if (seen.has(value)) return '"[Circular]"';
 
@@ -272,6 +310,7 @@
 //   };
 // }
 
+// // Standalone JSON.stringify polyfill function
 // const JsonStringifyPolyfill = (obj) => {
 //   const seen = new Set();
 
@@ -309,6 +348,7 @@
 //   return stringifyValue(obj);
 // };
 
+// // Example usage of the polyfill
 // const person = {
 //   name: "Alice",
 //   age: 30,
@@ -319,15 +359,15 @@
 //   },
 // };
 
-// person.circle = person;
+// person.circle = person;                // Creating a circular reference
 
 // console.log(person);
 
-// const jsonString = JSON.stringify(person);
+// const jsonString = JSON.stringify(person);  // Native method will throw error on circular reference
 
 // console.log(jsonString);
 
-// const customJsonString = JsonStringifyPolyfill(person);
+// const customJsonString = JsonStringifyPolyfill(person); // Custom implementation handles circular references
 
 // console.log(customJsonString);
 
@@ -335,6 +375,9 @@
 // ----------------------
 // TAKE HOME ASSIGNMENT
 
+// =====================================================================
+// PRACTICAL JSON DATA EXTRACTION
+// =====================================================================
 // PROBLEM STATEMENT
 // -------------------
 // We have a nested JSON object with mixed data types. Our objective is to extract all keys where the values are of type number.
@@ -400,6 +443,9 @@
 //   return result;
 // };
 
-// console.log(extractKeysWithNumberValues(nestedData));
+// console.log(extractKeysWithNumberValues(nestedData)); // ["id", "age", "zip", "lat", "lng", "followers", "following", "posts"]
 
+// =====================================================================
+// API CONCEPTS
+// =====================================================================
 // API
