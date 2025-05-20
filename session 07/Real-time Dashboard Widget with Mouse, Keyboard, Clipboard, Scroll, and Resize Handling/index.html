@@ -1,13 +1,14 @@
 <!-- Problem Statement:
-Build a real-time dashboard widget with the following features:
+You’re building a small dashboard widget that:
 
- - Tracks how many times a user clicks on the widget.
- - Copies the stats when user presses Ctrl + C.
- - Pressing any number key sets the "threshold" of clicks.
- - Changes background color if threshold is exceeded.
- - Widget updates its layout on window resize.
- - Logs when user scrolls to the widget section.
- - Exports a custom event thresholdReached when threshold is crossed. -->
+ - Tracks how many times it was clicked.
+ - Lets users copy that data with Ctrl + C.
+ - Lets users change the click "threshold" by pressing any number key.
+ - Changes background color when threshold is crossed.
+ - Adapts layout on window resize.
+ - Logs when the widget is scrolled into view.
+ - Emits a custom event (thresholdReached) once the click count reaches the threshold.
+-->
 
 <!-- ------------------------------------------------------------------------------------------------ -->
 
@@ -39,3 +40,18 @@ Build a real-time dashboard widget with the following features:
    - Test edge cases (e.g., setting threshold to 0)
    - Ensure the widget is responsive on different screen sizes
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dashboard Widget</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="widget">
+      Click Count: <span id="count">0</span><br />
+      Threshold: <span id="threshold">5</span>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
