@@ -197,6 +197,36 @@
 - yangbaopan.vscode-java-ibatisx
 - zh9528.file-size
 
+### 💻 Batch Installation Instructions
+
+You can install all the extensions above at once using the command line. Here's how:
+
+#### For Windows:
+
+1. Save the list of extensions to a file called `extensions.txt` (one extension per line).
+2. Open Command Prompt and run:
+
+```batch
+for /f "tokens=*" %i in (extensions.txt) do code --install-extension %i
+```
+
+#### For macOS/Linux:
+
+1. Save the list of extensions to a file called `extensions.txt` (one extension per line).
+2. Open Terminal and run:
+
+```bash
+cat extensions.txt | xargs -L 1 code --install-extension
+```
+
+Alternatively, you can use this one-liner to install all extensions directly:
+
+```bash
+code --install-extension aaron-bond.better-comments && code --install-extension Anjali.clipboard-history && code --install-extension aslamanver.vsc-export && code --install-extension byi8220.indented-block-highlighting && code --install-extension ChakrounAnas.turbo-console-log && code --install-extension dsznajder.es7-react-js-snippets && code --install-extension dzhavat.bracket-pair-toggler && code --install-extension eamodio.gitlens && code --install-extension EditorConfig.EditorConfig && code --install-extension esbenp.prettier-vscode && code --install-extension firsttris.vscode-jest-runner && code --install-extension formulahendry.auto-rename-tag && code --install-extension GitHub.remotehub && code --install-extension GitHub.vscode-codeql && code --install-extension GitHub.vscode-pull-request-github && code --install-extension Goopware.raythis && code --install-extension Gruntfuggly.todo-tree && code --install-extension hbenl.vscode-test-explorer && code --install-extension howardzuo.vscode-npm-dependency && code --install-extension humao.rest-client && code --install-extension iocave.customize-ui && code --install-extension iocave.monkey-patch && code --install-extension ionutvmi.path-autocomplete && code --install-extension johnpapa.vscode-cloak && code --install-extension johnpapa.vscode-peacock && code --install-extension mikestead.dotenv && code --install-extension ms-azuretools.vscode-docker && code --install-extension ms-playwright.playwright && code --install-extension ms-python.isort && code --install-extension ms-python.python && code --install-extension ms-python.vscode-pylance && code --install-extension ms-vscode.azure-repos && code --install-extension ms-vscode.remote-repositories && code --install-extension ms-vscode.test-adapter-converter && code --install-extension naumovs.color-highlight && code --install-extension oderwat.indent-rainbow && code --install-extension Perkovec.emoji && code --install-extension phplasma.csv-to-table && code --install-extension redhat.fabric8-analytics && code --install-extension redhat.java && code --install-extension redhat.vscode-commons && code --install-extension redhat.vscode-xml && code --install-extension ritwickdey.LiveServer && code --install-extension Shan.code-settings-sync && code --install-extension streetsidesoftware.code-spell-checker && code --install-extension sysoev.language-stylus && code --install-extension sysoev.vscode-open-in-github && code --install-extension tintinweb.vscode-decompiler && code --install-extension VisualStudioExptTeam.intellicode-api-usage-examples && code --install-extension VisualStudioExptTeam.vscodeintellicode && code --install-extension vmware.vscode-concourse && code --install-extension vmware.vscode-manifest-yaml && code --install-extension vscjava.vscode-java-pack && code --install-extension vscjava.vscode-lombok && code --install-extension WallabyJs.quokka-vscode && code --install-extension wayou.vscode-todo-highlight && code --install-extension wesbos.theme-cobalt2 && code --install-extension yangbaopan.vscode-java-ibatisx && code --install-extension zh9528.file-size
+```
+
+**Note**: You may need to restart VS Code after installing the extensions for them to take effect.
+
 ---
 
 <div align="center">
