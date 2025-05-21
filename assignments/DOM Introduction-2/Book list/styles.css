@@ -1,0 +1,53 @@
+/*  your css code here. If applicable */
+/* container centering */
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: sans-serif;
+}
+
+/* form layout */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.form-group label {
+  font-weight: bold;
+}
+.form-group input {
+  padding: 8px;
+  font-size: 16px;
+}
+.form-group button {
+  width: 120px;
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+/* basic table + striped rows */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+/* delete button */
+.delete {
+  padding: 4px 8px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
