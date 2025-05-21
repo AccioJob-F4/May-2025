@@ -88,7 +88,7 @@
 - **Tutorial**: [TypeScript Crash Course](https://www.youtube.com/watch?v=BCg4U1FzODs&ab_channel=TraversyMedia)
 
 </details>
-****
+
 ### <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" width="20" height="20"/> Redux
 
 <details>
