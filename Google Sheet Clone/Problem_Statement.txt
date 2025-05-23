@@ -1,0 +1,40 @@
+Google Sheet Clone
+
+Create a spreadsheet application that emulates key features of Google Sheets, focusing on the following requirements:
+
+1. Design a spreadsheet interface with:
+   - At least 20 columns (A-T) and 30 rows
+   - Column headers (A, B, C...) and row headers (1, 2, 3...)
+   - A formula bar that displays and accepts formulas
+   - A toolbar with basic formatting options
+
+2. Implement cell selection and navigation:
+   - Clicking a cell should highlight it and display its reference (e.g., "A1") 
+   - Support keyboard navigation (Tab to move right, Enter to move down)
+
+3. Add formula support with the following features:
+   - Basic arithmetic operations (+, -, *, /)
+   - Cell referencing (e.g., =A1+B1)
+   - Range functions: SUM, AVERAGE, MAX, MIN (e.g., =SUM(A1:A5))
+   - Error handling for invalid formulas
+
+4. Include cell formatting capabilities:
+   - Bold and italic text styling
+   - Text and background color customization
+   - Clear cell function
+
+5. Implement data persistence:
+   - Save and load spreadsheet data using localStorage
+   - Auto-save when cell content changes
+
+6. Add visual indicators for different cell types:
+   - Formula cells should have distinct styling
+   - Error cells should be highlighted
+
+TAKE HOME CHALLENGE:
+- Implement multi-cell selection
+- Add more functions (COUNT, IF, etc.)
+- Support for sorting or filtering data
+- CSV import/export functionality
+
+Your solution should work entirely in the browser without requiring a server backend.
