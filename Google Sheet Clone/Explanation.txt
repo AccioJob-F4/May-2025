@@ -1,0 +1,118 @@
+
+Google Sheets Clone - In-Depth JavaScript Code Explanation
+
+==========================================================
+
+1. High-Level Architecture Overview
+-----------------------------------
+The project is a frontend-only Google Sheets clone built entirely in the browser using HTML, CSS, and JavaScript. It simulates a spreadsheet with basic formulas, formatting, and data persistence using localStorage.
+
+Main Components:
+- HTML: Defines the structure (toolbar, formula bar, spreadsheet grid).
+- CSS: Styles the grid, toolbar, and cells.
+- JavaScript: Powers the dynamic behavior: cell editing, formula parsing, formatting, and persistence.
+
+Key Features:
+- 20 columns (A-T), 30 rows (1-30)
+- Toolbar with bold, italic, color options
+- Formula bar with support for arithmetic, SUM, AVERAGE, MAX, MIN
+- Cell selection and keyboard navigation (Tab, Enter)
+- LocalStorage-based data persistence
+- Formula evaluation with cell references and error handling
+
+2. JavaScript Core Logic Breakdown
+----------------------------------
+
+2.1 Global State Variables
+---------------------------
+- cellData: An object storing each cell's value, formula, and formatting (e.g., {A1: {value: 5, formula: "=SUM(B1:B5)", bold: true}}).
+- selectedCell: Tracks the currently selected cell DOM element.
+
+2.2 initSpreadsheet()
+----------------------
+- Builds the grid dynamically:
+  - Adds column headers (A-T)
+  - Adds row headers (1-30)
+  - Creates editable cells with 'data-id' (e.g., A1, B2)
+- Sets event listeners on each cell for click (selection), blur (data update), keydown (navigation).
+- Loads saved data from localStorage.
+
+2.3 selectCell(cell)
+---------------------
+- Highlights the selected cell and updates the formula bar.
+- Reflects the cell's formatting (bold, italic, colors) in the toolbar.
+
+2.4 updateToolbarState(cellId)
+------------------------------
+- Syncs toolbar buttons and color pickers with the selected cell's formatting.
+
+2.5 updateCellData(cell)
+------------------------
+- Saves the cell's content to cellData on blur.
+- Triggers dependent cell updates if the cell has a formula.
+- Calls saveToLocalStorage().
+
+2.6 handleCellKeydown(event)
+-----------------------------
+- Enter: Moves down a row.
+- Tab: Moves right a column.
+- If a formula (starting with '=') is entered, applies it using applyFormula().
+
+2.7 Formula Bar Event (formulaInput)
+------------------------------------
+- On Enter, applies the formula to the selected cell.
+
+2.8 applyFormula(cell, formula)
+-------------------------------
+- Stores the formula in cellData.
+- Calls evaluateFormula() to compute the result.
+- Updates the cell's content and applies 'formula' or 'error' class.
+
+2.9 evaluateFormula(formula, currentCellId)
+-------------------------------------------
+- Replaces SUM, AVERAGE, MAX, MIN ranges with computed values using regex.
+- Replaces cell references (A1, B2) with their values.
+- Evaluates the final arithmetic expression using evaluateExpression().
+
+2.10 evaluateExpression(expression)
+-----------------------------------
+- Safely evaluates arithmetic using Function().
+- Replaces any unresolved cell references with 0.
+
+2.11 updateDependentCells(changedCellId)
+----------------------------------------
+- Recalculates formulas in other cells that reference the changed cell.
+
+2.12 Formatting Features
+------------------------
+- Toolbar buttons toggle bold/italic styles, update text/bg colors.
+- Selected cell's state stored in cellData.
+
+2.13 Clear Cell (clear-btn)
+---------------------------
+- Resets the content, formatting, and removes data from cellData.
+
+2.14 Persistence
+-----------------
+- saveToLocalStorage(): Stores cellData as JSON in localStorage.
+- loadFromLocalStorage(): Loads cellData and applies content/formatting on page load.
+
+2.15 Default Cell Selection
+----------------------------
+- Selects A1 by default on load.
+
+3. CSS Styling Highlights
+--------------------------
+- Grid layout using CSS Grid.
+- Sticky headers for rows/columns.
+- .formula and .error classes for formula cells and errors.
+- .bold and .italic classes for text styles.
+
+4. Next Steps and Possible Improvements
+---------------------------------------
+- Multi-cell selection and bulk operations.
+- More functions (COUNT, IF, etc.).
+- CSV import/export functionality.
+- Refactoring formula parsing for scalability.
+
+This documentation provides a comprehensive breakdown of the Google Sheets clone logic, especially focusing on the JavaScript implementation.
