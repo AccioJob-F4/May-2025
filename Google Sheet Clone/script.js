@@ -598,3 +598,241 @@ function evaluateExpression(expression) {
     throw new Error(`Cannot evaluate expression: ${expression}`);
   }
 }
+
+/**
+ * Updates all cells that have formulas depending on the changed cell
+ * @param {string} changedCellId - The ID of the cell that was changed
+ */
+function updateDependentCells(changedCellId) {
+  // Iterate through all cells with data
+  for (const cellId in cellData) {
+    // If the cell has a formula
+    if (cellData[cellId].formula) {
+      const formula = cellData[cellId].formula;
+      // If the formula contains a reference to the changed cell
+      if (formula.includes(changedCellId)) {
+        const cell = document.querySelector(`.cell[data-id="${cellId}"]`);
+        if (cell) {
+          // Re-evaluate the formula with the new value
+          applyFormula(cell, formula);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Event listener for the bold button
+ * Toggles bold formatting for the selected cell
+ */
+document.getElementById("bold-btn").addEventListener("click", () => {
+  if (!selectedCell) return;
+
+  const cellId = selectedCell.dataset.id;
+  if (!cellData[cellId]) cellData[cellId] = {};
+
+  // Toggle bold state
+  cellData[cellId].bold = !cellData[cellId].bold;
+
+  // Update the cell's appearance
+  selectedCell.classList.toggle("bold", cellData[cellId].bold);
+
+  // Update the button's active state
+  document
+    .getElementById("bold-btn")
+    .classList.toggle("active", cellData[cellId].bold);
+
+  saveToLocalStorage();
+});
+
+/**
+ * Event listener for the italic button
+ * Toggles italic formatting for the selected cell
+ */
+document.getElementById("italic-btn").addEventListener("click", () => {
+  if (!selectedCell) return;
+
+  const cellId = selectedCell.dataset.id;
+  if (!cellData[cellId]) cellData[cellId] = {};
+
+  // Toggle italic state
+  cellData[cellId].italic = !cellData[cellId].italic;
+
+  // Update the cell's appearance
+  selectedCell.classList.toggle("italic", cellData[cellId].italic);
+
+  // Update the button's active state
+  document
+    .getElementById("italic-btn")
+    .classList.toggle("active", cellData[cellId].italic);
+
+  saveToLocalStorage();
+});
+
+/**
+ * Event listener for the text color input
+ * Changes the text color of the selected cell
+ */
+document.getElementById("text-color").addEventListener("input", (e) => {
+  if (!selectedCell) return;
+
+  const color = e.target.value;
+  const cellId = selectedCell.dataset.id;
+  if (!cellData[cellId]) cellData[cellId] = {};
+
+  // Store the text color
+  cellData[cellId].textColor = color;
+
+  // Apply the color to the cell
+  selectedCell.style.color = color;
+
+  saveToLocalStorage();
+});
+
+/**
+ * Event listener for the background color input
+ * Changes the background color of the selected cell
+ */
+document.getElementById("bg-color").addEventListener("input", (e) => {
+  if (!selectedCell) return;
+
+  const color = e.target.value;
+  const cellId = selectedCell.dataset.id;
+  if (!cellData[cellId]) cellData[cellId] = {};
+
+  // Store the background color
+  cellData[cellId].bgColor = color;
+
+  // Apply the color to the cell
+  selectedCell.style.backgroundColor = color;
+
+  saveToLocalStorage();
+});
+
+/**
+ * Event listener for the clear button
+ * Clears the content and formatting of the selected cell
+ */
+document.getElementById("clear-btn").addEventListener("click", () => {
+  if (!selectedCell) return;
+
+  const cellId = selectedCell.dataset.id;
+
+  // Clear content and styling
+  selectedCell.textContent = "";
+  selectedCell.className = "cell"; // Reset to base class
+  selectedCell.style = ""; // Remove inline styles
+
+  // Clear formula input
+  formulaInput.value = "";
+
+  // Remove cell data from storage
+  if (cellData[cellId]) {
+    delete cellData[cellId];
+  }
+
+  saveToLocalStorage();
+});
+
+/**
+ * Event listener for the save button
+ * Explicitly saves the current spreadsheet state to localStorage
+ */
+document.getElementById("save-btn").addEventListener("click", () => {
+  saveToLocalStorage();
+  alert("Spreadsheet saved successfully!");
+});
+
+/**
+ * Event listener for the load button
+ * Loads the spreadsheet data from localStorage
+ */
+document.getElementById("load-btn").addEventListener("click", () => {
+  loadFromLocalStorage();
+});
+
+/**
+ * Saves the current spreadsheet data to localStorage
+ */
+function saveToLocalStorage() {
+  localStorage.setItem("spreadsheetData", JSON.stringify(cellData));
+}
+
+/**
+ * Loads spreadsheet data from localStorage and applies it to the UI
+ */
+function loadFromLocalStorage() {
+  const savedData = localStorage.getItem("spreadsheetData");
+  if (savedData) {
+    cellData = JSON.parse(savedData);
+
+    // Apply data to cells
+    for (const cellId in cellData) {
+      const cell = document.querySelector(`.cell[data-id="${cellId}"]`);
+      if (cell) {
+        // Apply cell value
+        if (cellData[cellId].value !== undefined) {
+          cell.textContent = cellData[cellId].value;
+        }
+
+        // Apply formatting
+        if (cellData[cellId].bold) {
+          cell.classList.add("bold");
+        }
+
+        if (cellData[cellId].italic) {
+          cell.classList.add("italic");
+        }
+
+        if (cellData[cellId].textColor) {
+          cell.style.color = cellData[cellId].textColor;
+        }
+
+        if (cellData[cellId].bgColor) {
+          cell.style.backgroundColor = cellData[cellId].bgColor;
+        }
+
+        // Mark formula cells with special class
+        if (cellData[cellId].formula) {
+          cell.classList.add("formula");
+        }
+      }
+    }
+  }
+}
+
+// Initialize the spreadsheet when the script loads
+initSpreadsheet();
+
+// Select cell A1 by default to provide a starting point for the user
+const defaultCell = document.querySelector('.cell[data-id="A1"]');
+if (defaultCell) {
+  selectCell(defaultCell);
+  defaultCell.focus();
+}
+
+/**
+ * Event listener for detecting when a cell is clicked
+ * Updates the formula input field if the cell contains a formula
+ */
+document.addEventListener("click", function (event) {
+  const cell = event.target.closest(".cell");
+  if (cell && selectedCell === cell && cell.textContent.startsWith("=")) {
+    formulaInput.value = cell.textContent;
+  }
+});
+
+/**
+ * Event listener for detecting when a cell loses focus
+ * Processes formulas entered directly in cells
+ */
+document.addEventListener(
+  "blur",
+  function (event) {
+    const cell = event.target.closest(".cell");
+    if (cell && cell.textContent.startsWith("=")) {
+      applyFormula(cell, cell.textContent);
+    }
+  },
+  true // Use capture phase to ensure this runs before other blur events
+);
